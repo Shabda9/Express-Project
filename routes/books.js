@@ -7,7 +7,8 @@ router.get('/', async (req, res) => {
   try {
     const booksList = await Book.find();
     console.log("booksList", booksList)
-    res.render('books-list', { booksList: booksList })
+    res.json(booksList)
+    // res.render('books-list', { booksList: booksList })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
