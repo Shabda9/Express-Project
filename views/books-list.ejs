@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,
+		initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container mt-3">
+    <br />
+    <h1>Books list</h1>
+    <br />
+
+    <% console.log("Type of booksList:", Array.isArray(locals.booksList) ? "Array" : "Not an Array"); %>
+
+    <% for(let book of locals.booksList) {%>
+      <div class="container books-list-container my-4">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="book-name" style="font-size: 24px;">
+              <p>Book name: <%=book.name || "Default"%></p>
+            </div>
+            <button type="button" class="btn btn-danger my-3">Delete</button>
+          </div>
+          <div class="col-md-3">
+            <div class="author" style="font-size: 24px;">
+              <p>Author: <%=book.author || "Default Author"%></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="published-date" style="font-size: 24px;">
+              <p>Published Date: <%=book.publishedDate || "Default Date"%></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="pages" style="font-size: 24px;">
+              <p>Pages: <%=book.pages || 0 %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+   <% } %>
+
+
+  </div>
+</body>
+
+</html>
