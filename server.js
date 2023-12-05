@@ -1,6 +1,5 @@
 // Requiring dot env's configuration
 require('dotenv').config();
-
 const express = require('express')
 
 // Database
@@ -9,7 +8,23 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
+const cors = require('cors')
 const app = express()
+
+// Set up CORS
+app.use(cors({
+  origin: true, // "true" will copy the domain of the request back
+                // to the reply. If you need more control than this
+                // use a function.
+
+  credentials: true, // This MUST be "true" if your endpoint is
+                     // authenticated via either a session cookie
+                     // or Authorization header. Otherwise the
+                     // browser will block the response.
+
+  methods: 'POST,GET,PUT,OPTIONS,DELETE' // Make sure you're not blocking
+                                         // pre-flight OPTIONS requests
+}));
 
 database.on('error', (error) => {
   console.log('ERROR', error);
