@@ -7,13 +7,15 @@ import { BookListComponent } from './book-list/book-list.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Add this line
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AddBookComponent } from './add-book/add-book.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,

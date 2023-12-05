@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../requests.service';
+import { Router } from '@angular/router';
+import { Book } from '../interface';
 
 @Component({
   selector: 'app-book-list',
@@ -9,34 +11,43 @@ import { RequestsService } from '../requests.service';
 })
 export class BookListComponent implements OnInit {
   public bookForm!: FormGroup;
+  public books!: Book[];
+  public showDeleteModal!: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
-    private api: RequestsService
+    private api: RequestsService,
+    private router: Router
     ) {}
 
   ngOnInit() {
-    this.buildForm();
+    this.books = [];
+    this.getAllBooks();
   }
 
-  private buildForm() {
-    this.bookForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      author: ['', Validators.required],
-      publishedDate: ['', Validators.required],
-      pages: [null, [Validators.required, Validators.min(1)]]
-    });
-  }
-
-  onSubmit() {
-    if (this.bookForm.valid) {
-      // Handle form submission logic here
-      const formData = this.bookForm.value;
-      console.log(formData);
-    }
+  addNewBook() {
+    this.router.navigate(['/book/add']);
   }
 
   getAllBooks() {
-    this.api.getAllBooks().subscribe(res => console.log(res))
+    this.api.getAllBooks().subscribe((res: Book[]) => {
+      this.books = res
+    })
+  }
+
+  editBook(book: Book) {
+    this.router.navigate(['/book/', book._id]);
+    console.log('Update the book')
+  }
+
+  deleteBook(id: any) {
+    this.api.deleteBook(id).subscribe(res => {
+      this.getAllBooks();
+      this.showDeleteModal = true;
+    })
+  }
+
+  hideDeleteModal() {
+    this.showDeleteModal = false;
   }
 }

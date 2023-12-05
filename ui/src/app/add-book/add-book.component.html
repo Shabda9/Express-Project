@@ -1,11 +1,11 @@
-<!-- book-detail.component.html -->
-
 <div class="container mt-3">
-  <h1>Edit Book Details</h1>
+  <br />
+  <h1>Enter book details</h1>
+  <br />
   <form [formGroup]="bookForm">
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="bookName" style="font-size: 23px">Book Name</label>
+        <label for="bookName" style="font-size: 23px">Book name</label>
         <input type="text" class="form-control" formControlName="name">
       </div>
     </div>
@@ -19,19 +19,19 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="publishedDate" style="font-size: 23px">Published Date</label>
+        <label for="publishedDate" style="font-size: 23px">Published date</label>
         <input type="text" class="form-control" formControlName="publishedDate">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="pages" style="font-size: 23px">Number of Pages</label>
+        <label for="pages" style="font-size: 23px">Number of pages</label>
         <input type="number" class="form-control" formControlName="pages">
       </div>
     </div>
 
-    <button (click)="updateBook()" [disabled]="!bookForm.valid" type="submit" class="btn btn-dark mt-3">Update Book</button>
-    <button [routerLink]="['books']" type="submit" class="btn btn-success mx-3 mt-3">Go back</button>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary mt-3">Submit</button>
   </form>
+
 </div>

@@ -1,40 +1,36 @@
-<!-- book-form.component.html -->
-
 <div class="container mt-3">
-  <br />
-  <h1>Enter book details</h1>
-  <br />
-  <form [formGroup]="bookForm">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="bookName" style="font-size: 23px">Book name</label>
-        <input type="text" class="form-control" formControlName="name">
+  <h1>Books library</h1>
+
+  <div *ngIf="!showDeleteModal" class="books-container">
+    <div *ngFor="let book of books" class="book-card">
+      <h2>{{ book.name }}</h2>
+      <p>Author: {{ book.author }}</p>
+      <p>Published Date: {{ book.publishedDate }}</p>
+      <p>Pages: {{ book.pages }}</p>
+
+      <div class="buttons-block mt-3">
+        <button class="btn btn btn-dark" (click)="editBook(book)">Edit</button>
+        <button class="btn btn-danger mx-3" (click)="deleteBook(book._id)">Delete</button>
       </div>
     </div>
+  </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="author" style="font-size: 23px">Author</label>
-        <input type="text" class="form-control" formControlName="author">
+  <div *ngIf="showDeleteModal" class="delete-successful">
+    <div class="card text-white bg-info mb-3">
+      <div class="card-header">Success</div>
+      <div class="card-body">
+        <h5 class="card-title">Book Deleted</h5>
+        <p class="card-text">The book has been successfully deleted from the database.</p>
       </div>
     </div>
+  </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="publishedDate" style="font-size: 23px">Published date</label>
-        <input type="text" class="form-control" formControlName="publishedDate">
-      </div>
-    </div>
+  <div class="add-new-book container px-3">
+    <button class="btn btn-info mt-4" (click)="addNewBook()">Add New Book</button>
+    <button *ngIf="showDeleteModal" class="btn btn-outline-danger mt-4 mx-3" (click)="hideDeleteModal()">
+      View books list
+    </button>
+  </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="pages" style="font-size: 23px">Number of pages</label>
-        <input type="number" class="form-control" formControlName="pages">
-      </div>
-    </div>
-
-    <button type="submit" (click)="onSubmit()" class="btn btn-primary mt-3">Submit</button>
-    <button type="submit" (click)="getAllBooks()" class="btn btn-primary mt-3">Get all books</button>
-  </form>
 
 </div>

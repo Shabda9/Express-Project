@@ -38,8 +38,8 @@ router.post('/', async (req, res) => {
   console.log('data', data)
 
   try {
-    await data.save();
-    res.status(200).redirect('/books')
+    response = await data.save();
+    res.status(200).json(response)
 
   } catch (error) {
     res.status(400).json({ message: error.message })
@@ -49,8 +49,8 @@ router.post('/', async (req, res) => {
 //Get by ID Method
 router.get('/:id', async (req, res) => {
   try {
-    const data = await Model.findById(req.params.id);
-    res.json(data)
+    const data = await Book.findById(req.params.id);
+    res.status(200).json(data)
   }
   catch (error) {
     res.status(500).json({ message: error.message })
@@ -58,7 +58,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //Update by ID Method
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
@@ -66,7 +66,7 @@ router.patch('/:id', async (req, res) => {
     // Specifies whether to return the updated data in the body or not
     const options = { new: true };
 
-    const result = await Model.findByIdAndUpdate(id, updatedData, options)
+    const result = await Book.findByIdAndUpdate(id, updatedData, options)
 
     res.send(result)
   }
@@ -77,7 +77,7 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const deleteMessage = await Book.deleteOne({});
+    const deleteMessage = await Book.deleteOne({"_id": req.params.id});
     res.status(200).json(deleteMessage)
   } catch (error) {
     res.status(500).json({ message: error.message })
