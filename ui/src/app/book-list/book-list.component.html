@@ -1,6 +1,19 @@
-<div class="container mt-3">
-  <h1>Books library</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container"> <!-- Added container class for proper alignment -->
+    <a class="navbar-brand" href="#">Books Library</a>
 
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto"> <!-- Changed to ml-auto for right alignment -->
+        <li class="nav-item">
+          <button class="btn btn-info mt-2" (click)="addNewBook()">Add New Book</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-3">
+  <h1 class="d-flex justify-content-center my-4">Books List</h1>
   <div *ngIf="!showDeleteModal" class="books-container">
     <div *ngFor="let book of books" class="book-card">
       <h2>{{ book.name }}</h2>
@@ -26,11 +39,8 @@
   </div>
 
   <div class="add-new-book container px-3">
-    <button class="btn btn-info mt-4" (click)="addNewBook()">Add New Book</button>
     <button *ngIf="showDeleteModal" class="btn btn-outline-danger mt-4 mx-3" (click)="hideDeleteModal()">
       View books list
     </button>
   </div>
-
-
 </div>
