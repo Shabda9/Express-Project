@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Book } from './interface';
+import { Book, User } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,8 @@ export class RequestsService {
     return this.http.put<any>(this.baseUrl + 'books/' + id, params)
   }
 
-  deleteAllBooks() {
-
+  createUser(params: User) {
+    return this.http.post<any>(this.baseUrl + 'users/', params)
   }
+
 }
